@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<body>
+    <h2>Test Upload Surat</h2>
+    <form id="uploadForm">
+        <input type="text" name="nomor_surat" placeholder="Nomor Surat" value="001/TEST/2026" required><br><br>
+        <input type="text" name="surat_perihal" placeholder="Perihal" value="Uji Coba Upload" required><br><br>
+        <input type="text" name="asal_surat" placeholder="ID Asal Surat (misal: 1)" value="1" required><br><br>
+        <input type="file" name="file" accept="application/pdf"><br><br>
+        <button type="submit">Upload</button>
+    </form>
+
+    <script>
+        const form = document.getElementById('uploadForm');
+        // Masukkan Token Login Anda di sini!
+        const TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTEsInJvbGUiOiJzdXBlcl9hZG1pbiIsIm5hbWEiOiJNdWhhbW1hZGkgRGlhbnN5YWggUHV0cmEiLCJpYXQiOjE3Njc5ODIxMDUsImV4cCI6MTc2ODA2ODUwNX0.7aSUqCLhPoCUU9vvUdmhC95uufH0ufk-uJgnuo_CZbc"; 
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const formData = new FormData(form);
+
+            try {
+                const response = await fetch('http://localhost:5000/api/surat', {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': 'Bearer ' + TOKEN
+                    },
+                    body: formData
+                });
+                const result = await response.json();
+                console.log(result);
+                alert(result.message);
+            } catch (error) {
+                console.error(error);
+                alert("Upload Gagal");
+            }
+        });
+    </script>
+</body>
+</html>

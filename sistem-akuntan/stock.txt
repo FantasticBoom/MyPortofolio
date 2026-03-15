@@ -1,0 +1,2 @@
+stock akhir => tetap tersimpan ke periode baru
+LPA => sisa dana periode sebelumnya(manual)
